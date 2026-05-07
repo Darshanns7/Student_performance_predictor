@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Performance Prediction System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+  <div class="page">
+
+    <!-- ── Sidebar ───────────────────────────────────────────── -->
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-icon">◈</span>
+        <span class="brand-name">Prediction</span>
+      </div>
+      <nav class="nav">
+        <a href="#" class="nav-item active" data-view="dashboard" onclick="switchView('dashboard'); return false;">Dashboard</a>
+        <a href="#" class="nav-item" data-view="history" onclick="switchView('history'); return false;">History</a>
+        <a href="#" class="nav-item" data-view="settings" onclick="switchView('settings'); return false;">Settings</a>
+      </nav>
+      <div class="sidebar-footer">ML · 4 models</div>
+    </aside>
+
+    <!-- ── Main ─────────────────────────────────────────────── -->
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h1 class="page-title">Student Performance Prediction System</h1>
+          <p class="page-sub">Enter a student's details to predict pass / fail across four ML models</p>
+        </div>
+        <div class="model-pill" id="best-pill">Loading models…</div>
+      </header>
+
+      <!-- Dashboard View -->
+      <div id="view-dashboard" class="view-container">
+      <!-- Inputs -->
+      <section class="card input-section">
+        <p class="section-label">Input features</p>
+        <div class="slider-grid">
+
+          <div class="slider-block">
+            <div class="slider-header">
+              <span class="slider-name">Study hours / day</span>
+              <span class="slider-val" id="sh-out">6.0 hrs</span>
+            </div>
+            <input type="range" id="study-hours" min="0" max="12" step="0.1" value="6" />
+            <div class="slider-range"><span>0</span><span>12</span></div>
+          </div>
+
+          <div class="slider-block">
+            <div class="slider-header">
+              <span class="slider-name">Attendance</span>
+              <span class="slider-val" id="att-out">75 %</span>
+            </div>
+            <input type="range" id="attendance" min="0" max="100" step="1" value="75" />
+            <div class="slider-range"><span>0%</span><span>100%</span></div>
+          </div>
+
+          <div class="slider-block">
+            <div class="slider-header">
+              <span class="slider-name">Previous marks</span>
+              <span class="slider-val" id="pm-out">65 / 100</span>
+            </div>
+            <input type="range" id="prev-marks" min="0" max="100" step="1" value="65" />
+            <div class="slider-range"><span>0</span><span>100</span></div>
+          </div>
+
+        </div>
+        <button class="predict-btn" id="predict-btn" onclick="predict()">
+          Predict performance
+        </button>
+      </section>
+
+      <!-- Model accuracies -->
+      <section>
+        <p class="section-label">Model accuracies</p>
+        <div class="model-grid" id="model-grid">
+          <!-- populated by JS -->
+        </div>
+      </section>
+
+      <!-- Result -->
+      <section>
+        <p class="section-label">Prediction result</p>
+        <div id="result-area">
+          <div class="result-placeholder">Click "Predict performance" to see results here</div>
+        </div>
+      </section>
+      </div>
+
+      <!-- History View -->
+      <div id="view-history" class="view-container" style="display: none;">
+        <div class="card">
+          <p class="section-label">Prediction history</p>
+          <div id="history-list">
+            <div class="result-placeholder">No predictions yet</div>
+          </div>
+          <button class="predict-btn" id="clear-history-btn" style="margin-top: 1rem; background: var(--red);" onclick="clearHistory()">
+            Clear history
+          </button>
+        </div>
+      </div>
+
+      <!-- Settings View -->
+      <div id="view-settings" class="view-container" style="display: none;">
+        <div class="card">
+          <p class="section-label">Settings</p>
+          <div class="settings-group">
+            <label class="settings-label">
+              <input type="checkbox" id="history-enabled" checked />
+              Enable prediction history
+            </label>
+            <p class="settings-description">Store predictions in browser for later review</p>
+          </div>
+          <div class="settings-group">
+            <label class="settings-label">
+              <input type="checkbox" id="auto-save" checked />
+              Auto-save predictions
+            </label>
+            <p class="settings-description">Automatically save predictions after each forecast</p>
+          </div>
+          <div class="settings-group">
+            <h3 class="settings-subheading">About</h3>
+            <p class="settings-description">Student Performance Predictor v1.0</p>
+            <p class="settings-description">Using 4 ML models to predict student pass/fail outcomes</p>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
