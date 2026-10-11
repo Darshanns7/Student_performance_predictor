@@ -55,7 +55,7 @@ python backend/train.py
 python backend/app.py
 ```
 
-Open http://localhost:5000 in your browser.
+Open https://student-performance-predictor-pis4.onrender.com
 
 ## API endpoints
 
