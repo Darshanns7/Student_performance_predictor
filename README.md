@@ -79,7 +79,7 @@ Open https://student-performance-predictor-pis4.onrender.com
 
 ```json
 {
-  "best_model": "Random Forest",
+  "best_model": "Logistic Regression",
   "best_result": {
     "prediction": "Pass",
     "probability": 0.83,
